@@ -668,7 +668,6 @@ DPSMate.DB.VARIABLES_LOADED = function()
 				_G("DPSMate_Details"..val):SetToplevel(true)
 			end
 		end
-		
 		-- Saving pointer locally to reduce global lookup overhead
 		this:UpdatePointer();
 		
@@ -1400,7 +1399,7 @@ function DPSMate.DB:EnemyDamage(mode, arr, Duser, Dname, Dhit, Dcrit, Dmiss, Dpa
 	
 	for cat=1,2 do 
 		gen = arr[cat]
-		if not gen[cause] then gen[cause] = {} end
+		if not gen or not gen[cause] then gen[cause] = {} end
 		gen = gen[cause]
 		if not gen[Duser] then
 			gen[Duser] = {i = 0}
@@ -2263,7 +2262,7 @@ function DPSMate.DB:UpdatePlayerCBT(cbt)
 	local notInCombat = true
 	local type = "raid"
 	local num = GetNumRaidMembers()
-	local cbt1, cbt2 = DPSCBT["effective"][1], DPSCBT["effective"][2]
+	local cbt1, cbt2 =DPSCBT["effective"] and DPSCBT["effective"][1] or 0, DPSCBT["effective"] and DPSCBT["effective"][2] or 0
 	if num<=0 then
 		type = "party"
 		num = GetNumPartyMembers()
@@ -2277,8 +2276,8 @@ function DPSMate.DB:UpdatePlayerCBT(cbt)
 	for i=1, num do
 		if UnitAffectingCombat(type..i) or UnitAffectingCombat(type.."pet"..i) then
 			name = UnitName(type..i)
-			cbt1[name] = (cbt1[name] or 0) + cbt
-			cbt2[name] = (cbt2[name] or 0) + cbt
+			cbt1[name] = (cbt1 and cbt1[name] or 0) + cbt
+			cbt2[name] = (cbt1 and cbt2[name] or 0) + cbt
 			notInCombat = false
 		end
 	end
@@ -2294,8 +2293,8 @@ function DPSMate.DB:OnUpdate()
 		LastUpdate = LastUpdate + arg1
 		if LastUpdate>=UpdateTime then
 			cbtpt = DPSCBT["effective"]
-			DPSCBT["total"] = DPSCBT["total"] + LastUpdate
-			DPSCBT["current"] = DPSCBT["current"] + LastUpdate
+			DPSCBT["total"] = (DPSCBT["total"] and DPSCBT["total"] or 0 )+ LastUpdate
+			DPSCBT["current"] = (DPSCBT["current"] and DPSCBT["current"] or 0 )+ LastUpdate
 			
 			CBTCache[1] = floor(DPSCBT["total"])
 			CBTCache[2] = floor(DPSCBT["current"])
@@ -2304,8 +2303,8 @@ function DPSMate.DB:OnUpdate()
 			
 			-- Check NPC E CBT Time (May be inaccurate) -> Can be used as active time later
 			for cat, _ in pairs(ActiveMob) do
-				cbtpt[1][cat] = (cbtpt[1][cat] or 0) + LastUpdate
-				cbtpt[2][cat] = (cbtpt[2][cat] or 0) + LastUpdate
+				cbtpt[1][cat] = (cbtpt and cbtpt[1] and cbtpt[1][cat] or 0) + LastUpdate
+				cbtpt[2][cat] = (cbtpt and cbtpt[2] and cbtpt[2][cat] or 0) + LastUpdate
 			end
 			ActiveMob = {}
 			

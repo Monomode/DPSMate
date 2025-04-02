@@ -509,7 +509,7 @@ function DPSMate.Sync:DMGTakenStatIn(arg2, arg4)
 	abid = DB:BuildAbility(t[3])
 	userid2 = DB:BuildUser(t[4])
 	if not Arrays[2][userid] then return end
-	if not Arrays[2][userid][userid2][abid] then return end
+	if not Arrays[2][userid][userid2] then return end
 	if not Arrays[2][userid][userid2][abid] then return end
 	t[1] = tnbr(t[1])
 	if t[1]>DPSMateCombatTime["total"] and (t[1]>5*DPSMateCombatTime["total"] or t[1]>20000) then return end
