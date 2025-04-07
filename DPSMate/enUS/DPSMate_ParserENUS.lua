@@ -457,7 +457,7 @@ function DPSMate.Parser:SelfHits(msg)
 	local nextword, choice;
 	_, choice, k = GetNextWord(msg, k, SHChoices, true)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("1: Event not parsed yet => "..msg) or DPSMate:SendMessage("1: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("1: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("1: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	if choice < 3 then
@@ -528,7 +528,7 @@ function DPSMate.Parser:SelfMisses(msg)
 	local nextword, choice;
 	_, choice, k = GetNextWord(msg, k, SMChoices, true)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("2: Event not parsed yet => "..msg) or DPSMate:SendMessage("2: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("2: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("2: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	if choice == 3 then return end
@@ -561,7 +561,7 @@ function DPSMate.Parser:SelfSpellDMG(msg)
 	local nextword, choice, ability;
 	ability, choice, k = GetNextWord(msg, k, SSDChoices, false)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("3: Event not parsed yet => "..msg) or DPSMate:SendMessage("3: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("3: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("3: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	local o,p = strfind(ability, "Your ", 1, true);
@@ -692,7 +692,7 @@ function DPSMate.Parser:PeriodicDamage(msg)
 	local nextword, choice, source;
 	source, choice, k = GetNextWord(msg, k, PDChoices, false)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("4: Event not parsed yet => "..msg) or DPSMate:SendMessage("4: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("4: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("4: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	if choice == 4 then return end
@@ -772,7 +772,7 @@ function DPSMate.Parser:FriendlyPlayerDamage(msg)
 			local source
 			source, choice, k = GetNextWord(msg, k, FPDList2, false)
 			if choice == -1 then
-				local debug = DPSMate.Debug and DPSMate.Debug:Store("5: Event not parsed yet => "..msg) or DPSMate:SendMessage("5: Event not parsed yet, inform Shino! => "..msg)
+				local debug = DPSMate.Debug and DPSMate.Debug:Store("5: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("5: Event not parsed yet, inform Shino! => "..msg))
 				return
 			end
 			
@@ -833,7 +833,7 @@ function DPSMate.Parser:FriendlyPlayerDamage(msg)
 				
 				ability, choice, k = GetNextWord(msg, k, FPDList, false)
 				if choice == -1 then
-					local debug = DPSMate.Debug and DPSMate.Debug:Store("6: Event not parsed yet => "..msg) or DPSMate:SendMessage("6: Event not parsed yet, inform Shino! => "..msg)
+					local debug = DPSMate.Debug and DPSMate.Debug:Store("6: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("6: Event not parsed yet, inform Shino! => "..msg))
 					return
 				end
 				if choice == 8 then return end -- fails
@@ -924,7 +924,7 @@ function DPSMate.Parser:FriendlyPlayerDamage(msg)
 		k = j+1
 		i,j = strfind(msg, " 's ", k, true);
 		if not i then
-			local debug = DPSMate.Debug and DPSMate.Debug:Store("26: Event not parsed yet => "..msg) or DPSMate:SendMessage("26: Event not parsed, inform Shino: "..msg)
+			local debug = DPSMate.Debug and DPSMate.Debug:Store("26: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("26: Event not parsed yet, inform Shino! => "..msg))
 			return
 		end
 		
@@ -957,7 +957,7 @@ function DPSMate.Parser:FriendlyPlayerHits(msg)
 	local nextword, choice, source;
 	source, choice, k = GetNextWord(msg, k, FPHChoices, false)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("7: Event not parsed yet => "..msg) or DPSMate:SendMessage("7: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("7: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("7: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	if choice < 3 then
@@ -1035,7 +1035,7 @@ function DPSMate.Parser:FriendlyPlayerMisses(msg)
 	local nextword, choice, source;
 	source, choice, k = GetNextWord(msg, k, FPMChoices, false)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("8: Event not parsed yet => "..msg) or DPSMate:SendMessage("8: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("8: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("8: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	if choice == 1 then
@@ -1125,7 +1125,7 @@ function DPSMate.Parser:CreatureVsSelfHits(msg)
 	local source, choice, nextword;
 	source, choice, k = GetNextWord(msg, k, CVSHChoices, false)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("9: Event not parsed yet => "..msg) or DPSMate:SendMessage("9: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("9: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("9: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	if choice < 3 then
@@ -1181,7 +1181,7 @@ function DPSMate.Parser:CreatureVsSelfMisses(msg)
 	source, choice, k = GetNextWord(msg, k, CVSMChoices, false)
 	
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("10: Event not parsed yet => "..msg) or DPSMate:SendMessage("10: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("10: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("10: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	if choice == 4 then return end
@@ -1214,7 +1214,7 @@ function DPSMate.Parser:CreatureVsSelfSpellDamage(msg)
 	local nextword, choice;
 	nextword, choice, k = GetNextWord(msg, k, CVSSDChoices, false)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("11: Event not parsed yet => "..msg) or DPSMate:SendMessage("11: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("11: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("11: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	if choice == 10 then return end
@@ -1326,7 +1326,7 @@ function DPSMate.Parser:PeriodicSelfDamage(msg)
 	local target;
 	target, choice, k = GetNextWord(msg, k, PSDChoices, false)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("12: Event not parsed yet => "..msg) or DPSMate:SendMessage("12: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("12: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("12: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 
@@ -1405,7 +1405,7 @@ function DPSMate.Parser:CreatureVsCreatureHits(msg)
 	local nextword, choice, source;
 	source, choice, k = GetNextWord(msg, k, CVCHChoices, false)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("13: Event not parsed yet => "..msg) or DPSMate:SendMessage("13: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("13: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("14: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	local hit, crit = 0,0
@@ -1442,7 +1442,7 @@ function DPSMate.Parser:CreatureVsCreatureMisses(msg)
 	source, choice, k = GetNextWord(msg, k, CVCMChoices, false)
 	
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("14: Event not parsed yet => "..msg) or DPSMate:SendMessage("14: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("14: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("14: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	if choice == 1 then
@@ -1481,7 +1481,7 @@ function DPSMate.Parser:SpellPeriodicDamageTaken(msg)
 	local nextword, choice, source;
 	source, choice, k = GetNextWord(msg, k, SPDTChoices, false)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("15: Event not parsed yet => "..msg) or DPSMate:SendMessage("15: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("15: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("15: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	
@@ -1552,7 +1552,7 @@ function DPSMate.Parser:CreatureVsCreatureSpellDamage(msg)
 	local nextword, choice, source, ability;
 	nextword, choice, k = GetNextWord(msg, k, CVCSDChoices, false)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("16: Event not parsed yet => "..msg) or DPSMate:SendMessage("16: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("16: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("16: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	if choice == 12 or choice == 16 then return end -- Fail events
@@ -1666,7 +1666,7 @@ function DPSMate.Parser:SpellSelfBuff(msg)
 	local nextword, choice;
 	_, choice, k = GetNextWord(msg, k, SSBChoices, true)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("17: Event not parsed yet => "..msg) or DPSMate:SendMessage("17: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("17: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("17: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	
@@ -1755,7 +1755,7 @@ function DPSMate.Parser:SpellPeriodicSelfBuff(msg)
 	
 	nextword, choice, k = GetNextWord(msg, k, SPSBChoices, false)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("18: Event not parsed yet => "..msg) or DPSMate:SendMessage("18: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("18: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("18: Event not parsed yet, inform Shino! => "..msg))
 				return
 			end
 	if choice == 1 then
@@ -1879,7 +1879,7 @@ function DPSMate.Parser:SpellHostilePlayerBuff(msg)
 	local nextword, choice;
 	nextword, choice, k = GetNextWord(msg, k, SHPBChoices, false)
 	if choice == -1 then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("19: Event not parsed yet => "..msg) or DPSMate:SendMessage("19: Event not parsed yet, inform Shino! => "..msg)
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("19: Event not parsed yet => "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("19: Event not parsed yet, inform Shino! => "..msg))
 		return
 	end
 	
@@ -2113,7 +2113,7 @@ function DPSMate.Parser:CombatFriendlyDeath(msg)
 	local source, choice
 	source, choice, k = GetNextWord(msg, k, CFDChoices, false)
 	if not source then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("30: Event not parsed correctly : "..msg) or DPSMate:SendMessage("30: Event not parsed correctly, inform Shino!: "..msg);
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("30: Event not parsed correctly : "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("30: Event not parsed yet, inform Shino! => "..msg))
 		return;
 	end
 	if choice == 2 then
@@ -2142,7 +2142,7 @@ function DPSMate.Parser:CombatHostileDeaths(msg)
 	end
 	local source = strsub(msg, 1, i-1)
 	if not source then
-		local debug = DPSMate.Debug and DPSMate.Debug:Store("31: Event not parsed correctly : "..msg) or DPSMate:SendMessage("31: Event not parsed correctly, inform Shino!: "..msg);
+		local debug = DPSMate.Debug and DPSMate.Debug:Store("31: Event not parsed correctly : "..msg) or (DPSMate.ShowMsg and DPSMate:SendMessage("31: Event not parsed yet, inform Shino! => "..msg))
 		return;
 	end
 	DB:UnregisterDeath(source)

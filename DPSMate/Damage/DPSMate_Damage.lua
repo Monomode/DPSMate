@@ -127,7 +127,7 @@ function DPSMate.Modules.Damage:ShowTooltip(user,k)
 		local pet = 0
 		local edtaken, edtakenPet = {}, {}
 		-- Getting the value of the pet
-		while a[i] do
+		while a and a[i] do
 			if c[i][2] then
 				pet = pet + c[i][1]
 			end
