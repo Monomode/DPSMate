@@ -200,9 +200,9 @@ function DPSMate.Modules.DetailsDamage:EvalToggleTable(comp)
 			end
 			c[1] = val[DPSMateUser[comp or DetailsUser][1]]["i"]
 			-- pet
-			if DPSMateUser[cname or DetailsUser][5] and DPSMateUser[DPSMateUser[cname or DetailsUser][5]] and DPSMateSettings["mergepets"] and DPSMateUser[cname or DetailsUser][5] ~= (cname or DetailsUser) then
-				if val[DPSMateUser[DPSMateUser[cname or DetailsUser][5]][1]] then
-					for p, v in pairs(val[DPSMateUser[DPSMateUser[cname or DetailsUser][5]][1]]) do
+			if DPSMateUser[comp or DetailsUser][5] and DPSMateUser[DPSMateUser[comp or DetailsUser][5]] and DPSMateSettings["mergepets"] and DPSMateUser[comp or DetailsUser][5] ~= (comp or DetailsUser) then
+				if val[DPSMateUser[DPSMateUser[comp or DetailsUser][5]][1]] then
+					for p, v in pairs(val[DPSMateUser[DPSMateUser[comp or DetailsUser][5]][1]]) do
 						if p ~= "i" then
 							local i = 1
 							while true do
@@ -221,7 +221,7 @@ function DPSMate.Modules.DetailsDamage:EvalToggleTable(comp)
 							end
 						end
 					end
-					c[1] = c[1] + val[DPSMateUser[DPSMateUser[cname or DetailsUser][5]][1]]["i"]
+					c[1] = c[1] + val[DPSMateUser[DPSMateUser[comp or DetailsUser][5]][1]]["i"]
 				end
 			end
 			local i = 1
@@ -544,7 +544,11 @@ function DPSMate.Modules.DetailsDamage:UpdatePie(gg, cname)
 	end
 	gg:ResetPie()
 	for cat, val in uArr do
-		if (dArr[cat][2]) and DPSMateSettings["mergepets"] and DPSMateUser[cname or DetailsUser][5] ~= (cname or DetailsUser) then user=DPSMateUser[DPSMateUser[cname or DetailsUser][5]][1] else user=DPSMateUser[cname or DetailsUser][1] end
+		if (dArr[cat][2]) and DPSMateSettings["mergepets"] and DPSMateUser[cname or DetailsUser][5] ~= (cname or DetailsUser) then 
+			user=DPSMateUser[DPSMateUser[cname or DetailsUser][5]][1] 
+		else 
+			user=DPSMateUser[cname or DetailsUser][1] 
+		end
 		local percent = (db[user][val][13]*100/dTot)
 		gg:AddPie(percent, 0, DPSMate:GetAbilityById(val))
 	end

@@ -1140,16 +1140,16 @@ function DPSMate.Parser:CreatureVsSelfHits(msg)
 		k = j+1
 		local amount, _ = GetDamage(nextword)
 		local prefixAmount, prefixCase, _ = GetPrefix(msg, k)
-		local crush, block = 0,0
+		local crush, block, blockAmount = 0,0,0
 		if prefixCase then
 			if prefixCase == "crushing" then crush = 1; hit=0; crit=0;
-			elseif prefixCase == "blocked" then block = 1; hit=0; crit=0;
+			elseif prefixCase == "blocked" then block = 1; hit=0; crit=0; blockAmount=prefixAmount;
 			elseif prefixCase == "absorbed" then
 				DB:SetUnregisterVariables(prefixAmount, AAttack, source)
 			end
 		end
 		DB:EnemyDamage(false, nil, target, AAttack, hit, crit, 0, 0, 0, 0, amount, source, block, crush)
-		DB:DamageTaken(target, AAttack, hit, crit, 0, 0, 0, 0, amount, source, crush, block)
+		DB:DamageTaken(target, AAttack, hit, crit, 0, 0, 0, 0, amount, source, crush, blockAmount)
 		DB:DeathHistory(target, a, AAttack, amount, hit, crit, 0, crush)
 	else
 		i,j = strfind(msg, " on ", k, true)

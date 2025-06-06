@@ -686,7 +686,7 @@ DPSMate.DB.VARIABLES_LOADED = function()
 		DPSMate:SendMessage("DPSMate build "..DPSMate.VERSION.." has been loaded!")
 		DPSMate:SendMessage("This is a remastered build, consider it the last one. I have focused on reducing the complexity in this update and fix the remaining bugs!")
 		DPSMate:SendMessage("If anyone is interested in further fixing this addon, adding features etc. feel free to make a pull request in the repo!")
-		DPSMate:SendMessage("Also, If you would like to upload raid logs and armory, take a look at https://legacyplayers.com");
+	--	DPSMate:SendMessage("")
 		this.loaded = true
 		DPSMate.Options.PLAYER_ENTERING_WORLD()
 		
@@ -899,7 +899,7 @@ function DPSMate.DB:OnGroupUpdate()
 				DPSMateUser[pet][6] = DPSMateUser[name][1]
 				DPSMate.Parser.TargetParty[pet] = type.."pet"..i
 			end
-			if pet and DPSMate.Parser.TargetParty[pet] then
+			if pet and not DPSMate.Parser.TargetParty[pet] then -- LAYT ???
 				DPSMateUser[pet][4] = false
 				DPSMateUser[pet][6] = ""
 				DPSMateUser[name][5] = ""
@@ -938,7 +938,10 @@ end
 
 function DPSMate.DB:BuildUser(Dname, Dclass)
 	if not Dname then Dname = "?!NIL Name?!" end
-
+	local _,_, pet,owner = strfind(Dname,"(.+)%s%((.+)%)")
+	if pet then 
+		Dname = pet
+	end
 	if not DPSUser[Dname] then
 		self.userlen = self.userlen + 1
 		DPSUser[Dname] = {
